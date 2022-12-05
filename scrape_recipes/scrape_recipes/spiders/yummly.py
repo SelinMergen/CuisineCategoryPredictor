@@ -6,7 +6,7 @@ from scrapy.http import Request
 
 def read_urls():
     data = []
-    with open('yummly/yummly_searches.json', 'r') as fp:
+    with open('yummly/yummly_all_links.json', 'r') as fp:
         data = json.load(fp)
     return data
 
@@ -20,17 +20,17 @@ class YummlySpider(scrapy.Spider):
         'JOBDIR' : 'jobs/yummly-1'
     }
     
-    rules = (
-        Rule(LinkExtractor(allow=r'recipes/'), callback='parse', follow=True),
-        Rule(LinkExtractor(allow=r'recipe/'), callback='parse_recipe', follow=True),
-    )
+    # rules = (
+    #     # Rule(LinkExtractor(allow=r'recipes/'), callback='parse', follow=True),
+    #     Rule(LinkExtractor(allow=r'recipe/'), callback='parse_recipe', follow=True),
+    # )
+
+    # def parse(self, response):
+    #     for url in response.xpath('//*[@class="link-overlay"]/@href').extract():
+    #         url=response.urljoin(url)
+    #         yield Request(url, callback=self.parse_recipe, meta={'href':url})
 
     def parse(self, response):
-        for url in response.xpath('//*[@class="link-overlay"]/@href').extract():
-            url=response.urljoin(url)
-            yield Request(url, callback=self.parse_recipe, meta={'href':url})
-
-    def parse_recipe(self, response):
         item = {}
         result = {}
         self.logger.info("Code: " + str(response.status) + " Parsing: " + response.url)

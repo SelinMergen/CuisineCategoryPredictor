@@ -33,7 +33,7 @@ for recipe in YUMMLY:
         search_urls.append('https://yummly.com' + str(link).replace(' ', '%20'))
         print(link)
         
-with open('yumly_searches.json', 'w') as fp:
+with open('yummly_searches.json', 'w') as fp:
     json.dump(search_urls, fp, indent=6)
     
 for search in search_urls:
@@ -43,5 +43,5 @@ for search in search_urls:
         urls.append('https://yummly.com' + str(url).replace(' ', '%20'))
         print(url)
     
-with open('yumly_links.json', 'w') as fp:
+with open('yummly_links.json', 'w') as fp:
     json.dump(urls, fp, indent=6)

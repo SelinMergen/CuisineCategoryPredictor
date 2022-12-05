@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Scrapy settings for recipes_spider project
+# Scrapy settings for scrape_recipes project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,15 +7,16 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'recipes_spider'
+BOT_NAME = 'scrape_recipes'
 
-SPIDER_MODULES = ['recipes_spider.spiders']
-NEWSPIDER_MODULE = 'recipes_spider.spiders'
+SPIDER_MODULES = ['scrape_recipes.spiders']
+NEWSPIDER_MODULE = 'scrape_recipes.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'recipes_spider (+http://www.yourdomain.com)'
-USER_AGENT = 'recipescrape (+https://yummly.com)'
+#USER_AGENT = 'scrape_recipes (+http://www.yourdomain.com)'
+USER_AGENT = 'scrape_recipes (+https://yummly.com)'
+
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -28,17 +27,16 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 0.8
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+#CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
-TELNETCONSOLE_PASSWORD = 'scrapy'
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -49,13 +47,13 @@ TELNETCONSOLE_PASSWORD = 'scrapy'
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'recipes_spider.middlewares.RecipesSpiderSpiderMiddleware': 543,
+#    'scrape_recipes.middlewares.ScrapeRecipesSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'recipes_spider.middlewares.RecipesSpiderDownloaderMiddleware': 543,
+#    'scrape_recipes.middlewares.ScrapeRecipesDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -66,10 +64,9 @@ TELNETCONSOLE_PASSWORD = 'scrapy'
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
    #'recipes_spider.pipelines.RecipesSpiderPipeline': 300,
-   'recipes_spider.pipelines.MongoPipeline': 800,
-}
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -92,6 +89,6 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-# MongoDB Configuration
-MONGO_URI='mongodb+srv://selinmergen:tobb_2019@recipes.gvwwv3j.mongodb.net/?retryWrites=true&w=majority'
-MONGO_DATABASE='recipes'
+# Set settings whose default value is deprecated to a future-proof value
+REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+TWISTED_REACTOR = 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'

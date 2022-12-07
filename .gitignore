@@ -2,3 +2,5 @@
 */jobs/*
 .idea/*
 .venv/*
+.DS_Store
+*/recipes_*

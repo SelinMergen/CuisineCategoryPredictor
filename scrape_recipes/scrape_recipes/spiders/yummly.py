@@ -41,15 +41,14 @@ class YummlySpider(scrapy.Spider):
             self.logger.warning("Unable to get recipe from: " + response.url)
             pass
         
-        result['title'] = item['name'] if 'name' in item.keys() else response.xpath('//*[@class="recipe-title font-bold h2-text primary-dark"]/text()').extract()
-        result['nutrition'] = item['nutrition'] if 'nutrition' in item.keys() else None
-        result['rating'] = item['aggregateRating']['ratingValue'] if 'aggregateRating' in item.keys() else None
-        result['ratingCount'] = item['aggregateRating']['reviewCount'] if 'aggregateRating' in item.keys() else None
-        result['category'] = item['recipeCategory'] if 'recipeCategory' in item.keys() else None
-        result['keywords'] = item['keywords'] if 'keywords' in item.keys() else None
-        result['ingredients'] = item['recipeIngredient'] if 'recipeIngredient' in item.keys() else None
         result['link'] = response.url
+        result['title'] = item['name'] if 'name' in item.keys() else response.xpath('//*[@class="recipe-title font-bold h2-text primary-dark"]/text()').extract()
+        result['rating'] = item['aggregateRating']['ratingValue'] if 'aggregateRating' in item.keys() else None
+        result['category'] = item['recipeCategory'] if 'recipeCategory' in item.keys() else None
         result['cuisine'] = item['recipeCuisine'] if 'recipeCuisine' in item.keys() else None
+        result['keywords'] = item['keywords'] if 'keywords' in item.keys() else None
         result['totalTime'] = item['totalTime'] if 'totalTime' in item.keys() else None
+        result['ingredients'] = item['recipeIngredient'] if 'recipeIngredient' in item.keys() else None
+        result['nutrition'] = item['nutrition'] if 'nutrition' in item.keys() else None
         
         yield result

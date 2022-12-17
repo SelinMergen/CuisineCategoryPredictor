@@ -4,4 +4,5 @@
 .venv/*
 .DS_Store
 */recipes_*
-scrape_recipes/datasets/*
+datasets/yummly/*
+datasets/foodnetwork/*

@@ -4,22 +4,24 @@ from scrapy.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.http import Request
 
+
 def read_urls():
     data = []
-    with open('yummly/yummly_all_links.json', 'r') as fp:
+    with open('links/yummly/yummly_all_links.json', 'r') as fp:
         data = json.load(fp)
     return data
+
 
 class YummlySpider(scrapy.Spider):
     name = 'yummly'
     allowed_domains = ['yummly.com']
     start_urls = read_urls()
-    
+
     custom_settings = {
-        'LOG_LEVEL' : 'INFO',
-        'JOBDIR' : 'jobs/yummly-1'
+        'LOG_LEVEL': 'INFO',
+        'JOBDIR': 'jobs/yummly-1'
     }
-    
+
     # rules = (
     #     # Rule(LinkExtractor(allow=r'recipes/'), callback='parse', follow=True),
     #     Rule(LinkExtractor(allow=r'recipe/'), callback='parse_recipe', follow=True),
@@ -40,9 +42,10 @@ class YummlySpider(scrapy.Spider):
         except:
             self.logger.warning("Unable to get recipe from: " + response.url)
             pass
-        
+
         result['link'] = response.url
-        result['title'] = item['name'] if 'name' in item.keys() else response.xpath('//*[@class="recipe-title font-bold h2-text primary-dark"]/text()').extract()
+        result['title'] = item['name'] if 'name' in item.keys() else response.xpath(
+            '//*[@class="recipe-title font-bold h2-text primary-dark"]/text()').extract()
         result['rating'] = item['aggregateRating']['ratingValue'] if 'aggregateRating' in item.keys() else None
         result['category'] = item['recipeCategory'] if 'recipeCategory' in item.keys() else None
         result['cuisine'] = item['recipeCuisine'] if 'recipeCuisine' in item.keys() else None
@@ -50,5 +53,5 @@ class YummlySpider(scrapy.Spider):
         result['totalTime'] = item['totalTime'] if 'totalTime' in item.keys() else None
         result['ingredients'] = item['recipeIngredient'] if 'recipeIngredient' in item.keys() else None
         result['nutrition'] = item['nutrition'] if 'nutrition' in item.keys() else None
-        
+
         yield result

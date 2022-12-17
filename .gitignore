@@ -4,3 +4,4 @@
 .venv/*
 .DS_Store
 */recipes_*
+scrape_recipes/datasets/*

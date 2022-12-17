@@ -77,7 +77,7 @@ with open('yummly_all_links.json', 'w') as fp:
     json.dump(urls, fp, indent=6)   
 
 """
-Scraping data data faster using the data shared in api response 
+Scraping data faster using the data shared in api response 
 """
 # print('extracting columns')
 # data = {}

@@ -1,6 +1,4 @@
-import csv
 import json
-import pandas as pd
 import requests
 from parsel import Selector
 
@@ -73,35 +71,5 @@ for link in api:
         url = "https://www.yummly.com/" + str(item.get("tracking-id")).replace(' ', '%20')
         urls.append(url)
     
-with open('yummly_all_links.json', 'w') as fp:
+with open('./yummly_all_links.json', 'w') as fp:
     json.dump(urls, fp, indent=6)   
-
-"""
-Scraping data faster using the data shared in api response 
-"""
-# print('extracting columns')
-# data = {}
-# with open('recipes_from_api.csv', 'a', newline='') as csvfile:
-#     field_names = ['link', 'name', 'totalTime', 'rating', 'category', 'cuisine', 'tags', 'IngredientsWithAmount', 'Ingredients', 'NutritionValues']
-#     writer = csv.DictWriter(csvfile, fieldnames=field_names)
-#     writer.writeheader()
-#     for link in api:
-#         html = requests.get(link, headers=headers, timeout=30)
-#         if html.text:
-#             recipes = json.loads(html.text)
-#             for item in recipes.get('feed', []):
-#                 content = item.get("content")
-#                 data['link'] = f'https://www.yummly.com/{item.get("tracking-id")}'
-#                 print(data['link'])
-#                 data['name'] = content.get('details').get('name')
-#                 data['totalTime'] = content.get('details').get('totalTime')
-#                 data['rating'] = content.get('details').get('rating')
-#                 data['category'] = content.get('tags').get('course')[0].get('display-name') if 'course' in content.get('tags').keys() and content.get('tags').get('course') else None
-#                 data['cuisine'] = content.get('tags').get('cuisine')[0].get('display-name') if 'cuisine' in content.get('tags').keys() else None
-#                 data['tags'] = [{key: [x.get('display-name') for x in value]} for key, value in content.get('tags').items()]
-#                 data['IngredientsWithAmount'] = [str(ingredient.get('wholeLine')).replace('unchecked', '') for ingredient in content.get('ingredientLines')]
-#                 data['Ingredients'] = [ingredient.get('ingredient') for ingredient in content.get('ingredientLines')] 
-#                 data['NutritionValues'] = {str(x.get('attribute')):f'{x.get("value")}{x.get("unit").get("abbreviation")}' for x in content.get('nutrition').get('nutritionEstimates')}
-#                 writer.writerow(data)
-#         else:
-#             print("An error occured:", link)

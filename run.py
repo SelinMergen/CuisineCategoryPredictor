@@ -42,5 +42,5 @@ pred_category = model_category.predict(X_category)
 pred_category = le_category.inverse_transform(pred_category)
 
 if (len(ingredients) != 0):
-    st.write( 'Cousine: ' + pred_cuisine[0])
+    st.write( 'Cuisine: ' + pred_cuisine[0])
     st.write( 'Category: ' + pred_category[0])

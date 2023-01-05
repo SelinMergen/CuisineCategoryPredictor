@@ -1,4 +1,4 @@
-# Yap470-Project
+# Cuisine Predictor
 
 ## Dataset
 You can find scraped dataset in the link below:
